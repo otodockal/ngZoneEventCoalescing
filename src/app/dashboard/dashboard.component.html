@@ -1,0 +1,37 @@
+<h1>ngZoneEventCoalescing: true</h1>
+
+<p>
+  Turn on/off ngZoneEventCoalescing in main.ts and watch Angular CD cycles in
+  devtools Profiler.
+  <br />
+  This option isn't 100% built-in replacement and has a few differences:
+</p>
+
+<ol>
+  <li>
+    It hinders source events in Devtools, so instead of seeing
+    <i>Source:HTMLDocument.addEventListener:click</i>, you see <i>Source:fakeTopEventTask</i> in current version of Angular/Zone.js.
+  </li>
+  <li>CD is no longer synchronous, but asynchronous using requestAnimationFrame.</li>
+</ol>
+
+<p>
+  Even tho source events are swallowed, I think it's still worth the trouble.
+</p>
+
+
+<nb-card>
+  <nb-card-body>
+    <ul>
+      <li *ngFor="let item of [1, 2, 3, 4, 5]">
+        <span>Row {{ item }}</span>
+        <input
+          nbInput
+          [placeholder]="'Pick Date for row' + item"
+          [nbDatepicker]="dateTimePicker"
+        />
+        <nb-datepicker #dateTimePicker></nb-datepicker>
+      </li>
+    </ul>
+  </nb-card-body>
+</nb-card>
